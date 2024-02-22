@@ -35,12 +35,14 @@ class ModelSelector():
 
     def get_best_model_name(self):
 
-        history_path = self.history_paths[np.argmax(self.best_accuracies)]
+        history_path = self.history_paths[self.get_best_model_index()]
         # model path is the same as history path, 
         # except it does not start with "history" nor end with ".json"
         return os.path.basename(history_path)[8:-5] 
 
+    def get_best_model_index(self):
 
+        return np.argmax(self.best_accuracies)
     def get_best_model(self):
 
         model_name = self.get_best_model_name()
@@ -59,4 +61,5 @@ class ModelSelector():
         plt.plot(self.histories[index]["loss"], "b")
         plt.plot(self.histories[index]["val_loss"], "orange")
         plt.show()
+
 

@@ -3,14 +3,15 @@ import matplotlib.pyplot as plt
 from scikitplot.metrics import plot_confusion_matrix, plot_roc
 from sklearn import metrics
 import datetime
-
+import numpy as np
+import os 
 # ---------------------------------------------------------------------
 #  Utility functions
 # ---------------------------------------------------------------------
 
 def try_save_figure(folder_path, figure_name, figure):
 
-    if save_folder is not None:   
+    if folder_path is not None:   
         try: 
             figure.savefig(os.path.join(folder_path, figure_name))
         except OSError:
@@ -48,9 +49,6 @@ class ResultsVisualizer():
         print("Recall score", metrics.recall_score(self._y_test_flattened, self._y_pred_flattened))
 
     def display_figures(self, save_folder = None):
-        
-        confusion_path = os.path.join(results_folder_path, "confusion_matrix.pdf")
-        roc_path = os.path.join(results_folder_path, "roc_curve.pdf")
 
         # Plot and save confusion matrix
         fig, ax = plt.subplots(figsize=(16,12))
@@ -60,7 +58,7 @@ class ResultsVisualizer():
 
         # Plot and save roc curve
         fig, ax = plt.subplots(figsize=(16,12))
-        fpr, tpr, thresholds = metrics.roc_curve(_y_test, _y_pred)
+        fpr, tpr, thresholds = metrics.roc_curve(self._y_test_flattened, self._y_pred_flattened)
         roc_auc = metrics.auc(fpr, tpr)
         display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc)
         display.plot(ax=ax)
