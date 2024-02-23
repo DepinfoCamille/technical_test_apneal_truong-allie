@@ -17,7 +17,7 @@ Otherwise, it is computed in *build_models.ipynb*, with DataLoader. The addition
 ## Issues
 
 I was not able to load the models that I built. 
-Consequently, I do not have results to present...
+Consequently, I do not have much results to present... (see *Report.pdf*)
 I hope the clean and structured code that I provide will still be of interest to you!
 
 
