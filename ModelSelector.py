@@ -43,6 +43,7 @@ class ModelSelector():
     def get_best_model_index(self):
 
         return np.argmax(self.best_accuracies)
+
     def get_best_model(self):
 
         model_name = self.get_best_model_name()
@@ -52,14 +53,26 @@ class ModelSelector():
         with open(model_path, "rb") as f:
             return pickle.load(f)
 
-    def plot_history(self, index):
+    def plot_history(self, index, save_folder = None):
 
         assert index >= 0 and index < len(self.histories)
 
         print(self.histories[index]["loss"])
 
+        fig, ax = plt.subplots(1,1)
         plt.plot(self.histories[index]["loss"], "b")
         plt.plot(self.histories[index]["val_loss"], "orange")
+        if save_folder is not None:
+            fig.savefig(os.path.join(save_folder, "loss_curve.png"))
+
         plt.show()
+
+        fig, ax = plt.subplots(1,1)
+        plt.plot(self.histories[index]["binary_accuracy"], "b")
+        plt.plot(self.histories[index]["val_binary_accuracy"], "orange")
+        if save_folder is not None:
+            fig.savefig(os.path.join(save_folder, "accuracy_curve.png"))
+        plt.show()
+
 
 

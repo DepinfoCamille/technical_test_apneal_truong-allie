@@ -54,7 +54,7 @@ class ResultsVisualizer():
         fig, ax = plt.subplots(figsize=(16,12))
         plot_confusion_matrix(self._y_test_flattened, self._y_pred_flattened, ax=ax)
         if save_folder is not None:
-            try_save_figure(save_folder, "confusion_matrix.pdf", fig)
+            try_save_figure(save_folder, "confusion_matrix.png", fig)
 
         # Plot and save roc curve
         fig, ax = plt.subplots(figsize=(16,12))
@@ -63,10 +63,10 @@ class ResultsVisualizer():
         display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc)
         display.plot(ax=ax)
         if save_folder is not None:
-            try_save_figure(save_folder, "roc_curve.pdf", fig)
+            try_save_figure(save_folder, "roc_curve.png", fig)
 
 
-    def plot_data(self, X_row_id):
+    def plot_data(self, X_row_id, save_folder = None):
         """ Plot the features, groundtruth (red) and predictions (blue) at the given row index
         """
 
@@ -82,3 +82,6 @@ class ResultsVisualizer():
         ## Plot the groundtruth (red) and the model's predictions (blue)
         axes[-2].plot(self.y_test[X_row_id, :], "r")  
         axes[-1].plot(self.y_pred[X_row_id, :], "b")  
+        if save_folder is not None:
+            try_save_figure(save_folder, "sample_{}.png".format(X_row_id), fig)
+
