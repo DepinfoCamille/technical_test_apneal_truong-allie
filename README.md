@@ -11,6 +11,9 @@ Then ResultsVisualizer enables to compute relevant metrics, ROC curve, and segme
 
 *Report.pdf* presents the results and future work that I would have made if I had the time. 
 
+NB: The data/X_test.pkl file is too large for github. It can be downloaded here: https://we.tl/t-F6kAPmFYU3
+Otherwise, it is computed in *build_models.ipynb*, with DataLoader. It just needs a line of code to dump it with pickle. 
+
 ## Issues
 
 I was not able to load the models that I built. 
